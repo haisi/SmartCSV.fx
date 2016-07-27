@@ -1,10 +1,21 @@
 group 'ninja.javafx'
 version '0.5-SNAPSHOT'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.tornado:fxlauncher-gradle-plugin:1.0.11'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin:'application'
+apply plugin: 'application'
 apply plugin: 'idea'
+
+apply plugin: 'no.tornado.fxlauncher'
 
 sourceCompatibility = 1.8
 mainClassName = 'ninja.javafx.smartcsv.fx.SmartCSV'
@@ -33,6 +44,8 @@ dependencies {
     compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1' //version required
+fxlauncher {
+    applicationVendor 'javafx.ninja'
+    applicationUrl 'http://javafx.ninja/smartcsv/'
+    applicationMainClass 'ninja.javafx.smartcsv.fx.SmartCSV'
 }
